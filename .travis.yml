@@ -1,0 +1,21 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t over-fib/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run over-fib/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t over-fib/client ./client
+  - docker build -t over-fib/nginx ./nginx
+  - docker build -t over-fib/api ./api
+  - docker build -t over-fib/worker ./worker
+
+  echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push over-fib/client
+  - docker push over-fib/nginx
+  - docker push over-fib/api
+  - docker push over-fib/worker

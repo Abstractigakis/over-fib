@@ -4,7 +4,9 @@ An over engineered application of the Fibonacci sequence for the sake of practic
 
 ## Architecture
 
-![Alt text](imgs/architecture.png)
+![Alt text](imgs/arch-dev.png)
+
+![Alt text](imgs/arch-prod.png)
 
 ## CI/CD Pipeline
 
